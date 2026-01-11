@@ -1,0 +1,1102 @@
+/**
+ * VMP Security Portal - Main Styles
+ * 
+ * @package VMP_Security_Portal
+ */
+
+/* ==========================================================================
+   Layout & Container
+   ========================================================================== */
+
+.vmp-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.vmp-main {
+    min-height: calc(100vh - 200px);
+    padding: 40px 0;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.vmp-header {
+    background: #fff;
+    border-bottom: 1px solid var(--vmp-border);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.vmp-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vmp-logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--vmp-dark);
+    text-decoration: none;
+}
+
+.vmp-logo a:hover {
+    color: var(--vmp-primary);
+    text-decoration: none;
+}
+
+.vmp-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.vmp-nav-link {
+    color: var(--vmp-text);
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.vmp-nav-link:hover {
+    background: var(--vmp-gray);
+    color: var(--vmp-primary);
+    text-decoration: none;
+}
+
+.vmp-user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.vmp-user-email {
+    color: var(--vmp-text-light);
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.vmp-footer {
+    background: var(--vmp-dark);
+    color: #fff;
+    padding: 30px 0;
+    margin-top: 60px;
+}
+
+.vmp-footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.vmp-footer a {
+    color: #fff;
+    margin-left: 20px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.vmp-footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.vmp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.vmp-btn:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.vmp-btn-primary {
+    background: var(--vmp-primary);
+    color: #fff;
+}
+
+.vmp-btn-primary:hover {
+    background: var(--vmp-primary-dark);
+    color: #fff;
+}
+
+.vmp-btn-secondary {
+    background: var(--vmp-gray);
+    color: var(--vmp-text);
+}
+
+.vmp-btn-secondary:hover {
+    background: #ddd;
+}
+
+.vmp-btn-link {
+    background: none;
+    border: none;
+    color: var(--vmp-primary);
+    padding: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.vmp-btn-link:hover {
+    text-decoration: underline;
+    transform: none;
+    box-shadow: none;
+}
+
+.vmp-btn-block {
+    width: 100%;
+    justify-content: center;
+}
+
+.vmp-btn-lg {
+    padding: 14px 28px;
+    font-size: 16px;
+}
+
+.vmp-btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.vmp-btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 18px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.vmp-btn-icon:hover {
+    opacity: 1;
+}
+
+.vmp-back-btn {
+    background: none;
+    border: none;
+    color: var(--vmp-primary);
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+.vmp-back-btn:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+.vmp-form-group {
+    margin-bottom: 20px;
+}
+
+.vmp-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--vmp-text);
+    font-size: 14px;
+}
+
+.vmp-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    border: 1px solid var(--vmp-border);
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.vmp-input:focus {
+    outline: none;
+    border-color: var(--vmp-primary);
+    box-shadow: 0 0 0 3px rgba(34, 113, 177, 0.1);
+}
+
+.vmp-help-text {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--vmp-text-light);
+}
+
+.vmp-form-footer {
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Login Page
+   ========================================================================== */
+
+.vmp-login-page {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.vmp-login-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.vmp-login-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    padding: 40px;
+}
+
+.vmp-login-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.vmp-login-header svg {
+    margin: 0 auto 20px;
+}
+
+.vmp-login-header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: var(--vmp-dark);
+}
+
+.vmp-login-header p {
+    color: var(--vmp-text-light);
+    font-size: 14px;
+}
+
+.vmp-login-step {
+    display: none;
+}
+
+.vmp-login-step.active {
+    display: block;
+}
+
+.vmp-login-step h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--vmp-dark);
+}
+
+.vmp-step-description {
+    color: var(--vmp-text-light);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* ==========================================================================
+   Dashboard Page
+   ========================================================================== */
+
+.vmp-dashboard-page {
+    padding: 40px 0;
+}
+
+.vmp-dashboard-header {
+    margin-bottom: 40px;
+}
+
+.vmp-dashboard-header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+    color: var(--vmp-dark);
+}
+
+.vmp-dashboard-header p {
+    color: var(--vmp-text-light);
+    font-size: 16px;
+}
+
+/* Stats Grid */
+.vmp-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.vmp-stat-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.2s;
+}
+
+.vmp-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.vmp-stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vmp-stat-icon-blue {
+    background: rgba(34, 113, 177, 0.1);
+    color: var(--vmp-primary);
+}
+
+.vmp-stat-icon-green {
+    background: rgba(0, 163, 42, 0.1);
+    color: var(--vmp-success);
+}
+
+.vmp-stat-icon-purple {
+    background: rgba(118, 75, 162, 0.1);
+    color: #764ba2;
+}
+
+.vmp-stat-icon-orange {
+    background: rgba(219, 166, 23, 0.1);
+    color: var(--vmp-warning);
+}
+
+.vmp-stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--vmp-dark);
+    line-height: 1;
+}
+
+.vmp-stat-label {
+    font-size: 14px;
+    color: var(--vmp-text-light);
+    margin-top: 6px;
+}
+
+/* Section */
+.vmp-section {
+    margin-bottom: 40px;
+}
+
+.vmp-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.vmp-section-header h2 {
+    font-size: 24px;
+    color: var(--vmp-dark);
+}
+
+/* Card */
+.vmp-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+/* Table */
+.vmp-table-responsive {
+    overflow-x: auto;
+}
+
+.vmp-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.vmp-table thead {
+    background: var(--vmp-gray);
+}
+
+.vmp-table th {
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--vmp-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vmp-table td {
+    padding: 15px 20px;
+    border-top: 1px solid var(--vmp-border);
+    font-size: 14px;
+    color: var(--vmp-text);
+}
+
+.vmp-table-empty {
+    text-align: center;
+    color: var(--vmp-text-light);
+    padding: 40px 20px !important;
+}
+
+.vmp-license-key {
+    background: var(--vmp-gray);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+}
+
+/* Badges */
+.vmp-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vmp-badge-primary {
+    background: rgba(34, 113, 177, 0.1);
+    color: var(--vmp-primary);
+}
+
+.vmp-badge-secondary {
+    background: var(--vmp-gray);
+    color: var(--vmp-text-light);
+}
+
+.vmp-badge-success {
+    background: rgba(0, 163, 42, 0.1);
+    color: var(--vmp-success);
+}
+
+.vmp-badge-danger {
+    background: rgba(214, 54, 56, 0.1);
+    color: var(--vmp-danger);
+}
+
+.vmp-badge-warning {
+    background: rgba(219, 166, 23, 0.1);
+    color: var(--vmp-warning);
+}
+
+/* ==========================================================================
+   Alerts & Messages
+   ========================================================================== */
+
+.vmp-alert {
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.vmp-alert-error {
+    background: rgba(214, 54, 56, 0.1);
+    color: var(--vmp-danger);
+    border: 1px solid rgba(214, 54, 56, 0.2);
+}
+
+.vmp-alert-success {
+    background: rgba(0, 163, 42, 0.1);
+    color: var(--vmp-success);
+    border: 1px solid rgba(0, 163, 42, 0.2);
+}
+
+/* ==========================================================================
+   Loading & Spinners
+   ========================================================================== */
+
+.vmp-loading {
+    text-align: center;
+    padding: 30px;
+}
+
+.vmp-loading-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.vmp-spinner {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 15px;
+    border: 4px solid var(--vmp-gray);
+    border-top-color: var(--vmp-primary);
+    border-radius: 50%;
+    animation: vmp-spin 0.8s linear infinite;
+}
+
+@keyframes vmp-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Home Page
+   ========================================================================== */
+
+.vmp-home-page {
+    padding: 40px 0 80px;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 50%);
+}
+
+.vmp-hero {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 100px;
+    padding: 60px 20px;
+}
+
+.vmp-hero-badge {
+    margin-bottom: 30px;
+    animation: vmp-float 3s ease-in-out infinite;
+}
+
+@keyframes vmp-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.vmp-hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: var(--vmp-dark);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.vmp-hero-subtitle {
+    font-size: 20px;
+    color: var(--vmp-text-light);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.vmp-hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.vmp-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+}
+
+.vmp-feature {
+    text-align: center;
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.vmp-feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.vmp-feature-icon {
+    margin-bottom: 25px;
+}
+
+.vmp-feature h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--vmp-dark);
+    font-weight: 600;
+}
+
+.vmp-feature p {
+    color: var(--vmp-text-light);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.vmp-cta-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.vmp-cta-content h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.vmp-cta-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    opacity: 0.95;
+}
+
+.vmp-cta-content .vmp-btn-primary {
+    background: #fff;
+    color: #667eea;
+}
+
+.vmp-cta-content .vmp-btn-primary:hover {
+    background: #f0f0f1;
+    color: #667eea;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .vmp-header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .vmp-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .vmp-footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .vmp-footer a {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+    
+    .vmp-hero h1 {
+        font-size: 36px;
+    }
+    
+    .vmp-hero-subtitle {
+        font-size: 18px;
+    }
+    
+    .vmp-hero-actions {
+        flex-direction: column;
+    }
+    
+    .vmp-cta-content h2 {
+        font-size: 28px;
+    }
+    
+    .vmp-cta-section {
+        padding: 40px 25px;
+    }
+    
+    .vmp-login-box {
+        padding: 30px 25px;
+    }
+    
+    .vmp-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   License Management Modal
+   ========================================================================== */
+
+.vmp-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 99999 !important;
+}
+
+.vmp-modal[style*="display: block"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.vmp-modal[style*="display: none"] {
+    display: none !important;
+}
+
+.vmp-modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+.vmp-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.vmp-modal-close:hover {
+    color: #000;
+    background: #f3f4f6;
+}
+
+#vmp-modal-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #1f2937;
+    padding-right: 40px;
+}
+
+.vmp-details-box {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 6px;
+    margin: 20px 0;
+    border: 1px solid #e5e7eb;
+}
+
+.vmp-details-box h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.vmp-details-box p {
+    margin: 10px 0;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.vmp-details-box code {
+    background: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #1f2937;
+    border: 1px solid #d1d5db;
+}
+
+#vmp-active-sites-section,
+#vmp-activate-new-section {
+    margin: 25px 0;
+}
+
+#vmp-active-sites-section h3,
+#vmp-activate-new-section h3 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.vmp-sites-list {
+    margin: 15px 0;
+}
+
+.vmp-site-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    transition: all 0.2s;
+}
+
+.vmp-site-item:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.vmp-site-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.vmp-site-info strong {
+    color: #1f2937;
+    font-size: 14px;
+    word-break: break-all;
+}
+
+.vmp-site-version {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.vmp-empty-message {
+    color: #6b7280;
+    font-style: italic;
+    text-align: center;
+    padding: 30px 20px;
+    background: #f9fafb;
+    border-radius: 6px;
+    margin: 0;
+}
+
+.vmp-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    margin: 10px 0 15px;
+    font-size: 14px;
+    background: white;
+    color: #1f2937;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.vmp-select:focus {
+    outline: none;
+    border-color: var(--vmp-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.vmp-select:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+    color: #9ca3af;
+}
+
+.vmp-message {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.vmp-message-success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.vmp-message-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+.vmp-message-info {
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #3b82f6;
+}
+
+.info-text {
+    color: #4b5563;
+    font-size: 14px;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.warning-text {
+    color: #dc2626;
+    font-size: 14px;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.vmp-btn-danger {
+    background: #dc2626;
+    color: white;
+}
+
+.vmp-btn-danger:hover {
+    background: #b91c1c;
+}
+
+/* Mobile Responsiveness for Modal */
+@media (max-width: 768px) {
+    .vmp-modal-content {
+        padding: 20px;
+        max-width: 95%;
+    }
+    
+    #vmp-modal-title {
+        font-size: 20px;
+    }
+    
+    .vmp-site-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .vmp-site-item button {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   API Key Hash & 2FA Styling
+   ========================================================================== */
+
+.api-key-cell {
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+    white-space: nowrap;
+}
+
+.api-hash {
+    background: #f3f4f6;
+    color: #1f2937;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: help;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.vmp-btn-icon {
+    margin-left: 6px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    vertical-align: middle;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+
+.vmp-btn-icon:hover {
+    background: #e5e7eb;
+}
+
+.vmp-text-muted {
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.vmp-badge-success {
+    background: #10b981;
+    color: white;
+}
+
+.vmp-badge-warning {
+    background: #f59e0b;
+    color: white;
+}
+
+.vmp-badge-secondary {
+    background: #6b7280;
+    color: white;
+}
+
+.vmp-btn-sm {
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.vmp-btn-sm:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.vmp-stat-icon-red {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+}
+
+/* Improve table readability */
+.vmp-table th {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vmp-table td {
+    vertical-align: middle;
+}
+
+/* Responsive table adjustments */
+@media (max-width: 1200px) {
+    .api-hash {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+    
+    .vmp-table {
+        font-size: 13px;
+    }
+}
