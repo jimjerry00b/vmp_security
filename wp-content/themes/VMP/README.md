@@ -1,6 +1,6 @@
-# VMP Security Portal Theme
+# VMP&trade; Security Portal Theme
 
-Welcome to the **VMP Security Portal** WordPress theme!
+Welcome to the **VMP&trade; Security Portal** WordPress theme!
 
 ## 🚀 Installation & Activation
 
@@ -8,7 +8,7 @@ Welcome to the **VMP Security Portal** WordPress theme!
 
 1. Go to WordPress Admin: `http://localhost/VMP-Wordpress-Security.com/wp-admin`
 2. Navigate to **Appearance → Themes**
-3. Find **VMP Security Portal** and click **Activate**
+3. Find **VMP&trade; Security Portal** and click **Activate**
 
 ### Step 2: Create Required Pages
 

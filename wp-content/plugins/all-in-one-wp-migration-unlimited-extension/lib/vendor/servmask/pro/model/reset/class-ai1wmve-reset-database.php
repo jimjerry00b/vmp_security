@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2023 ServMask Inc.
+ * Copyright (C) 2014-2025 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Attribution: This code is part of the All-in-One WP Migration plugin, developed by
  *
  * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
  * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
@@ -55,9 +57,19 @@ class Ai1wmve_Reset_Database {
 
 		// Set progress
 		if ( isset( $params['ai1wm_reset_plugins'], $params['ai1wm_reset_themes'], $params['ai1wm_reset_media'], $params['ai1wm_reset_database'] ) ) {
-			Ai1wm_Status::done( __( 'Reset Successful' ), __( 'Your site has been fully reset to its original, pristine condition, as if it were newly installed. All content, themes, plugins, and settings have been removed. You now have a clean slate to rebuild your site exactly the way you want it. If you need to undo this action, please restore your site from a backup if available.', AI1WM_PLUGIN_NAME ) );
+			$message = __( 'Your site has been fully reset to its original, pristine condition, as if it were newly installed. All content, themes, plugins, and settings have been removed. You now have a clean slate to rebuild your site exactly the way you want it. If you need to undo this action, please restore your site from a backup if available.', AI1WM_PLUGIN_NAME );
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				WP_CLI::success( $message );
+			} else {
+				Ai1wm_Status::done( __( 'Reset Successful' ), $message );
+			}
 		} else {
-			Ai1wm_Status::done( __( 'Reset Successful' ), __( 'The reset of your site\'s database has been successfully completed. WordPress has been restored to its original state, similar to a new installation. Please remember, this action has removed all content, settings, and user data. Proceed to set up your site again or restore from a backup if necessary.', AI1WM_PLUGIN_NAME ) );
+			$message = __( 'The reset of your site\'s database has been successfully completed. WordPress has been restored to its original state, similar to a new installation. Please remember, this action has removed all content, settings, and user data. Proceed to set up your site again or restore from a backup if necessary.', AI1WM_PLUGIN_NAME );
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				WP_CLI::success( $message );
+			} else {
+				Ai1wm_Status::done( __( 'Reset Successful' ), $message );
+			}
 			exit;
 		}
 
@@ -151,7 +163,7 @@ class Ai1wmve_Reset_Database {
 	protected function reinstall_db() {
 		if ( ! function_exists( 'wp_install' ) ) {
 			// We need functions from here
-			require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+			require_once ABSPATH . '/wp-admin/includes/upgrade.php';
 		}
 
 		// Force creating all WP tables

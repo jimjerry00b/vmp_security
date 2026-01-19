@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2023 ServMask Inc.
+ * Copyright (C) 2014-2025 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Attribution: This code is part of the All-in-One WP Migration plugin, developed by
  *
  * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
  * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
@@ -35,6 +37,7 @@ class Ai1wmve_Reset_Themes {
 	 * Order matters - values (versions) must go from newest to oldest version
 	 */
 	protected static $default_themes = array(
+		'twentytwentyfive'  => '6.7',
 		'twentytwentyfour'  => '6.4',
 		'twentytwentythree' => '6.1',
 		'twentytwentytwo'   => '5.9',
@@ -91,7 +94,12 @@ class Ai1wmve_Reset_Themes {
 
 		// Set progress
 		if ( ! isset( $params['ai1wm_reset_plugins'], $params['ai1wm_reset_themes'], $params['ai1wm_reset_media'], $params['ai1wm_reset_database'] ) ) {
-			Ai1wm_Status::done( __( 'Reset Successful' ), __( 'Your theme has been successfully reset. All themes except the default WordPress theme have been removed, and the default theme is now active. This process has cleared all customizations and settings related to other themes. You can now start fresh with theme setup or install a new theme to customize your site\'s appearance.', AI1WM_PLUGIN_NAME ) );
+			$message = __( 'Your theme has been successfully reset. All themes except the default WordPress theme have been removed, and the default theme is now active. This process has cleared all customizations and settings related to other themes. You can now start fresh with theme setup or install a new theme to customize your site\'s appearance.', AI1WM_PLUGIN_NAME );
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				WP_CLI::success( $message );
+			} else {
+				Ai1wm_Status::done( __( 'Reset Successful' ), $message );
+			}
 			exit;
 		}
 
@@ -158,7 +166,7 @@ class Ai1wmve_Reset_Themes {
 		if ( ! is_wp_error( $api ) ) {
 
 			if ( ! class_exists( 'Theme_Upgrader' ) ) {
-				require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+				require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 			}
 
 			$upgrader = new Theme_Upgrader();

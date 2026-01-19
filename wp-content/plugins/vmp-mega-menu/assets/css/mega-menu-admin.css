@@ -1,0 +1,47 @@
+/**
+ * VMP Mega Menu Admin Styles
+ * Styles for the menu editing interface
+ */
+
+/* Mega Menu Options Container */
+.vmp-mega-menu-options {
+    clear: both;
+}
+
+.vmp-mega-menu-options label {
+    font-weight: 500;
+}
+
+.vmp-mega-menu-options input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.vmp-mega-menu-options select {
+    margin-left: 8px;
+    padding: 4px 8px;
+}
+
+/* Toggle visibility of column count field */
+.vmp-mega-menu-columns-field {
+    transition: opacity 0.3s ease;
+}
+
+/* Visual indicator for mega menu items */
+.menu-item-depth-0 .vmp-mega-menu-options {
+    border-left-color: #2271b1;
+}
+
+.menu-item-depth-1 .vmp-mega-menu-options {
+    border-left-color: #72aee6;
+}
+
+.menu-item-depth-2 .vmp-mega-menu-options {
+    border-left-color: #a7aaad;
+}
+
+/* Help text styling */
+.vmp-mega-menu-options small {
+    display: block;
+    margin-top: 4px;
+    line-height: 1.4;
+}

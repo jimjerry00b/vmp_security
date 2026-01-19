@@ -1,0 +1,300 @@
+/**
+ * VMP Mega Menu Styles
+ * Wide dropdown panels with multi-column support
+ */
+
+/* ========================================
+   Mega Menu Container
+   ======================================== */
+
+.mega-menu {
+    position: absolute !important;
+    width: auto !important;
+    min-width: 600px;
+    max-width: 900px;
+    padding: 0 !important;
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+/* Show mega menu on hover/active */
+.dropdown:hover > .mega-menu,
+.dropdown .mega-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Mega Menu Content Wrapper */
+.mega-menu-content {
+    padding: 20px;
+}
+
+/* Row inside mega menu */
+.mega-menu .row {
+    margin: 0;
+    --bs-gutter-x: 1.5rem;
+}
+
+/* ========================================
+   Mega Menu Columns
+   ======================================== */
+
+.mega-menu-column {
+    padding: 0;
+    /* border-right: 1px solid rgba(0, 0, 0, 0.08); */
+}
+
+.mega-menu-column:last-child {
+    border-right: none;
+}
+
+/* Responsive column widths */
+.mega-menu-columns-2 {
+    min-width: 500px;
+}
+
+.mega-menu-columns-3 {
+    min-width: 650px;
+}
+
+.mega-menu-columns-4 {
+    min-width: 800px;
+}
+
+.mega-menu-columns-5 {
+    min-width: 900px;
+}
+
+.mega-menu-columns-6 {
+    min-width: 1000px;
+}
+
+/* ========================================
+   Column Headers
+   ======================================== */
+
+.mega-menu-header-link {
+    display: block;
+    padding: 8px 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #2271b1;
+    pointer-events: none;
+    cursor: default;
+}
+
+.mega-menu-header-link:hover {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+/* ========================================
+   Mega Menu Lists
+   ======================================== */
+
+.mega-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-item {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ========================================
+   Mega Menu Links
+   ======================================== */
+
+.mega-menu-link {
+    display: block;
+    padding: 7px 12px;
+    color: #4a4a4a;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+.mega-menu-link:hover {
+    color: #2271b1;
+    background-color: #f0f6fc;
+    text-decoration: none;
+    padding-left: 16px;
+}
+
+.mega-menu-link:focus {
+    outline: 2px solid #2271b1;
+    outline-offset: 2px;
+}
+
+/* ========================================
+   Dropdown Toggle Icon (for mega menu items)
+   ======================================== */
+
+.nav-item.dropdown > .nav-link.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.5em;
+    vertical-align: 0.1em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+/* Rotate arrow when mega menu is open */
+.nav-item.dropdown:hover > .nav-link.dropdown-toggle::after,
+.nav-item.dropdown .nav-link.dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+}
+
+/* ========================================
+   Mobile Responsiveness
+   ======================================== */
+
+@media (max-width: 991.98px) {
+    /* Hide mega menu features on mobile */
+    .mega-menu {
+        display: none !important;
+    }
+    
+    /* Show simplified regular dropdowns instead */
+    .dropdown:hover > .dropdown-menu:not(.mega-menu) {
+        display: block;
+    }
+    
+    /* Make sure regular dropdowns work */
+    .dropdown-menu:not(.mega-menu) {
+        position: static !important;
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        padding: 0;
+        margin-left: 20px;
+    }
+    
+    .dropdown-item {
+        padding: 8px 15px;
+        color: #666;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .mega-menu {
+        min-width: 500px !important;
+        max-width: 700px !important;
+    }
+    
+    .mega-menu-columns-4,
+    .mega-menu-columns-5,
+    .mega-menu-columns-6 {
+        min-width: 600px !important;
+    }
+}
+
+/* ========================================
+   Desktop Hover Effects
+   ======================================== */
+
+@media (min-width: 992px) {
+    /* Prevent mega menu from closing immediately */
+    .dropdown:hover > .mega-menu {
+        display: block;
+    }
+    
+    /* Add slight delay to dropdown appearance */
+    .mega-menu {
+        transition-delay: 0.1s;
+    }
+    
+    /* Position mega menu correctly */
+    .navbar-nav .dropdown > .mega-menu {
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    
+    .navbar-nav .dropdown:hover > .mega-menu,
+    .navbar-nav .dropdown .mega-menu.show {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* ========================================
+   Accessibility
+   ======================================== */
+
+.mega-menu-link:focus-visible,
+.mega-menu-header-link:focus-visible {
+    outline: 2px solid #2271b1;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .mega-menu {
+        border: 2px solid currentColor;
+    }
+    
+    .mega-menu-column {
+        border-right-width: 2px;
+    }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .mega-menu,
+    .mega-menu-link {
+        transition: none;
+    }
+}
+
+/* ========================================
+   Dark Mode Support (Optional)
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    .mega-menu {
+        background: #1a1a1a;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .mega-menu-header-link {
+        color: #ffffff;
+        border-bottom-color: #4a9eff;
+    }
+    
+    .mega-menu-link {
+        color: #e0e0e0;
+    }
+    
+    .mega-menu-link:hover {
+        color: #4a9eff;
+        background-color: rgba(74, 158, 255, 0.1);
+    }
+    
+    .mega-menu-column {
+        border-right-color: rgba(255, 255, 255, 0.08);
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 /**
- * VMP Security Portal Theme Functions
+ * VMP&trade; Security Portal Theme Functions
  * 
  * @package VMP_Security_Portal
  * @version 1.0.0
@@ -48,6 +48,12 @@ function vmp_enqueue_assets() {
     
     // API Client (foundation for all API calls)
     wp_enqueue_script('vmp-api-client', VMP_THEME_URI . '/assets/js/api-client.js', array('jquery'), VMP_THEME_VERSION, true);
+    
+    // Mega Menu JavaScript
+    wp_enqueue_script('vmp-mega-menu', VMP_THEME_URI . '/assets/js/mega-menu.js', array(), VMP_THEME_VERSION, true);
+    
+    // Sticky Header JavaScript
+    wp_enqueue_script('vmp-sticky-header', VMP_THEME_URI . '/assets/js/sticky-header.js', array('jquery'), VMP_THEME_VERSION, true);
     
     // Page-specific scripts
     if (is_page_template('page-login.php')) {
@@ -401,3 +407,276 @@ function vmp_protect_dashboard() {
     }
 }
 add_action('template_redirect', 'vmp_protect_dashboard');
+
+/**
+ * Custom Walker for Mega Menu
+ * Detects menu items with 'has-mega-menu' CSS class and renders mega menu
+ */
+if (!class_exists('VMP_Mega_Menu_Walker')) {
+class VMP_Mega_Menu_Walker extends Walker_Nav_Menu {
+    
+    private $mega_menu_items = array();
+    private $current_mega_parent = null;
+    
+    /**
+     * Traverse elements to create list from elements.
+     * Display one element if the element doesn't have any children otherwise,
+     * display the element and its children.
+     */
+    public function display_element($element, &$children_elements, $max_depth, $depth, $args, &$output) {
+        if (!$element) {
+            return;
+        }
+        
+        $id_field = $this->db_fields['id'];
+        
+        // Check if element has children
+        if (is_object($args[0])) {
+            $args[0]->has_children = isset($children_elements[$element->$id_field]) && !empty($children_elements[$element->$id_field]);
+        }
+        
+        return parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
+    }
+    
+    /**
+     * Start level (submenu)
+     */
+    function start_lvl(&$output, $depth = 0, $args = null) {
+        // For mega menu items, collect children instead of outputting
+        if ($this->current_mega_parent !== null) {
+            return; // Don't output anything, we'll handle it in get_mega_menu_html
+        }
+        
+        $indent = str_repeat("\t", $depth);
+        $output .= "\n$indent<ul class=\"dropdown-menu\">\n";
+    }
+    
+    /**
+     * End level (close submenu)
+     */
+    function end_lvl(&$output, $depth = 0, $args = null) {
+        if ($this->current_mega_parent !== null) {
+            return;
+        }
+        $output .= "</ul>\n";
+    }
+    
+    /**
+     * Start the element output
+     */
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $classes = empty($item->classes) ? array() : (array) $item->classes;
+        $has_mega_menu = in_array('has-mega-menu', $classes);
+        
+        // If this is a child of a mega menu parent, store it
+        if ($depth > 0 && $this->current_mega_parent !== null) {
+            $this->mega_menu_items[$this->current_mega_parent][] = array(
+                'item' => $item,
+                'depth' => $depth
+            );
+            return; // Don't output yet
+        }
+        
+        // Build class names
+        $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args, $depth));
+        
+        // Add dropdown class for items with children (but not mega menu items)
+        if (isset($args->has_children) && $args->has_children && !$has_mega_menu && $depth === 0) {
+            $class_names .= ' dropdown';
+        }
+        
+        // Different class for depth levels
+        if ($depth === 0) {
+            $class_names = ' class="nav-item ' . esc_attr($class_names) . '"';
+        } else {
+            $class_names = ' class="' . esc_attr($class_names) . '"';
+        }
+        
+        $output .= '<li' . $class_names . '>';
+        
+        // Link attributes
+        $atts = array();
+        $atts['title'] = !empty($item->attr_title) ? $item->attr_title : '';
+        $atts['target'] = !empty($item->target) ? $item->target : '';
+        $atts['rel'] = !empty($item->xfn) ? $item->xfn : '';
+        $atts['href'] = !empty($item->url) ? $item->url : '#';
+        
+        // Different styling for depth levels
+        if ($depth === 0) {
+            $atts['class'] = 'nav-link fw-semibold';
+        } else {
+            $atts['class'] = 'dropdown-item';
+        }
+        
+        // Add ID for mega menu toggle
+        if ($has_mega_menu && $depth === 0) {
+            $atts['id'] = 'megaMenuToggle-' . $item->ID;
+            $atts['data-mega-menu'] = 'true';
+            $this->current_mega_parent = $item->ID;
+            $this->mega_menu_items[$item->ID] = array();
+        }
+        
+        // Add dropdown toggle attributes for items with children (but not mega menu)
+        if ($depth === 0 && !$has_mega_menu && isset($args->has_children) && $args->has_children) {
+            $atts['class'] .= ' dropdown-toggle';
+            $atts['data-bs-toggle'] = 'dropdown';
+            $atts['role'] = 'button';
+            $atts['aria-expanded'] = 'false';
+        }
+        
+        $atts = apply_filters('nav_menu_link_attributes', $atts, $item, $args, $depth);
+        
+        $attributes = '';
+        foreach ($atts as $attr => $value) {
+            if (!empty($value)) {
+                $value = ('href' === $attr) ? esc_url($value) : esc_attr($value);
+                $attributes .= ' ' . $attr . '="' . $value . '"';
+            }
+        }
+        
+        // Build link output
+        $item_output = $args->before;
+        $item_output .= '<a' . $attributes . '>';
+        $item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
+        
+        // Add dropdown arrow for items with children at depth 0
+        if ($depth === 0 && ($has_mega_menu || (isset($args->has_children) && $args->has_children))) {
+            $item_output .= ' <svg width="10" height="10" fill="currentColor" viewBox="0 0 16 16" style="margin-left: 4px;">';
+            $item_output .= '<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>';
+            $item_output .= '</svg>';
+        }
+        
+        $item_output .= '</a>';
+        $item_output .= $args->after;
+        
+        // Add mega menu dropdown HTML for items with has-mega-menu class (only at depth 0)
+        if ($has_mega_menu && $depth === 0) {
+            $item_output .= $this->get_mega_menu_html($item);
+        }
+        
+        $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+    }
+    
+    /**
+     * End the element output
+     */
+    function end_el(&$output, $item, $depth = 0, $args = null) {
+        // Reset current mega parent after processing
+        if ($depth === 0 && $this->current_mega_parent === $item->ID) {
+            $this->current_mega_parent = null;
+        }
+        
+        // Skip closing tag for mega menu children (they're not opened)
+        if ($depth > 0 && isset($this->mega_menu_items[$item->menu_item_parent])) {
+            return;
+        }
+        
+        $output .= "</li>\n";
+    }
+    
+    /**
+     * Get the mega menu HTML structure
+     * Loads custom template if available, otherwise uses dynamic child menu items
+     */
+    private function get_mega_menu_html($parent_item) {
+        $menu_slug = sanitize_title($parent_item->title);
+        $menu_id = $parent_item->ID;
+        
+        // Check for custom template files (in order of priority)
+        $template_paths = array(
+            VMP_THEME_DIR . '/mega-menu/mega-menu-' . $menu_id . '.php',      // By ID: mega-menu-123.php
+            VMP_THEME_DIR . '/mega-menu/mega-menu-' . $menu_slug . '.php',    // By slug: mega-menu-services.php
+            VMP_THEME_DIR . '/mega-menu/default.php'                          // Default template
+        );
+        
+        foreach ($template_paths as $template) {
+            if (file_exists($template)) {
+                ob_start();
+                include $template;
+                return ob_get_clean();
+            }
+        }
+        
+        // If no custom template found, generate dynamic mega menu from child items
+        return $this->generate_dynamic_mega_menu($parent_item);
+    }
+    
+    /**
+     * Generate dynamic mega menu from WordPress menu child items
+     */
+    private function generate_dynamic_mega_menu($parent_item) {
+        $children = isset($this->mega_menu_items[$parent_item->ID]) ? $this->mega_menu_items[$parent_item->ID] : array();
+        
+        if (empty($children)) {
+            return '';
+        }
+        
+        // Organize children into columns (depth 1 = column headers, depth 2 = links)
+        $columns = array();
+        $current_column = null;
+        
+        foreach ($children as $child_data) {
+            $child = $child_data['item'];
+            $depth = $child_data['depth'];
+            
+            if ($depth == 1) {
+                // This is a column header
+                $current_column = $child->ID;
+                $columns[$current_column] = array(
+                    'title' => $child->title,
+                    'url' => $child->url,
+                    'links' => array()
+                );
+            } elseif ($depth == 2 && $current_column !== null) {
+                // This is a link within a column
+                $columns[$current_column]['links'][] = array(
+                    'title' => $child->title,
+                    'url' => $child->url,
+                    'target' => $child->target,
+                    'classes' => $child->classes
+                );
+            }
+        }
+        
+        if (empty($columns)) {
+            return '';
+        }
+        
+        // Build the HTML
+        ob_start();
+        $dropdown_id = 'megaMenuDropdown-' . $parent_item->ID;
+        ?>
+        <!-- Mega Menu Dropdown -->
+        <div class="mega-menu-wrapper" id="<?php echo esc_attr($dropdown_id); ?>" data-parent="<?php echo esc_attr($parent_item->ID); ?>">
+            <div class="mega-menu-container">
+                <div class="container px-4">
+                    <div class="row">
+                        <?php 
+                        $col_class = 'col-lg-' . (12 / min(count($columns), 4)) . ' col-md-6';
+                        foreach ($columns as $column): 
+                        ?>
+                        <div class="<?php echo esc_attr($col_class); ?> mega-menu-column">
+                            <h6><?php echo esc_html($column['title']); ?></h6>
+                            <?php if (!empty($column['links'])): ?>
+                            <ul class="mega-menu-links">
+                                <?php foreach ($column['links'] as $link): ?>
+                                <li>
+                                    <a href="<?php echo esc_url($link['url']); ?>"
+                                       <?php if (!empty($link['target'])): ?>target="<?php echo esc_attr($link['target']); ?>"<?php endif; ?>>
+                                        <?php echo esc_html($link['title']); ?>
+                                    </a>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <?php endif; ?>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+}
+} // End class_exists check

@@ -150,7 +150,7 @@ See our [GDPR Compliant Privacy Policy here](https://www.iubenda.com/privacy-pol
 
 **Fixed**
 
-* Stored Cross-Site Scripting vulnerability in file upload (CVE-2025-8490). Thank you WordFence and Jack Pas for reporting this. [What you need to know](https://help.servmask.com/knowledgebase/cve-2025-8490-what-you-need-to-know).
+* Stored Cross-Site Scripting vulnerability in file upload (CVE-2025-8490). Thank you VMP and Jack Pas for reporting this. [What you need to know](https://help.servmask.com/knowledgebase/cve-2025-8490-what-you-need-to-know).
 * File upload exceptions handling for better error reporting
 
 **Improved**

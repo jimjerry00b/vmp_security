@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2023 ServMask Inc.
+ * Copyright (C) 2014-2025 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Attribution: This code is part of the All-in-One WP Migration plugin, developed by
  *
  * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
  * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
@@ -89,7 +91,12 @@ class Ai1wmve_Reset_Plugins {
 
 			// Set progress
 			if ( ! isset( $params['ai1wm_reset_plugins'], $params['ai1wm_reset_themes'], $params['ai1wm_reset_media'], $params['ai1wm_reset_database'] ) ) {
-				Ai1wm_Status::done( __( 'Reset Successful' ), __( 'All installed plugins have been successfully removed from your site. This action has cleared any settings, data, and customizations associated with those plugins. Your site is now in a clean state, free of any plugins. You can begin reinstalling your preferred plugins to configure your site with the functionality you need.', AI1WM_PLUGIN_NAME ) );
+				$message = __( 'All installed plugins have been successfully removed from your site. This action has cleared any settings, data, and customizations associated with those plugins. Your site is now in a clean state, free of any plugins. You can begin reinstalling your preferred plugins to configure your site with the functionality you need.', AI1WM_PLUGIN_NAME );
+				if ( defined( 'WP_CLI' ) && WP_CLI ) {
+					WP_CLI::success( $message );
+				} else {
+					Ai1wm_Status::done( __( 'Reset Successful' ), $message );
+				}
 				exit;
 			}
 

@@ -1,4 +1,4 @@
-# 🚀 VMP Security Portal - Installation Guide
+# 🚀 VMP&trade; Security Portal - Installation Guide
 
 ## Quick Setup (5 Minutes)
 
@@ -9,7 +9,7 @@
    - Login with your WordPress credentials
 
 2. **Navigate to Appearance → Themes**
-   - You should see "VMP Security Portal" theme
+   - You should see "VMP&trade; Security Portal" theme
    - Click **Activate**
 
 ### Step 2: Create Required Pages
@@ -109,7 +109,7 @@ define('VMP_BACKEND_API', 'https://newton-wordpress-security.vpnmasterpro.com/ap
 Edit `wp-content/themes/VMP/header.php` to replace the SVG logo with your image:
 
 ```html
-<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="VMP Security">
+<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="VMP&trade; Security">
 ```
 
 ---

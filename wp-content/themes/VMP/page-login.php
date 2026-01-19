@@ -18,12 +18,8 @@ get_header();
     <div class="vmp-login-container">
         <div class="vmp-login-box">
             <div class="vmp-login-header">
-                <svg width="60" height="60" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="40" height="40" rx="8" fill="#2271b1"/>
-                    <path d="M20 10L12 16V28L20 34L28 28V16L20 10Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M20 20L16 22V26L20 28L24 26V22L20 20Z" fill="white"/>
-                </svg>
-                <h1>Welcome to VMP Security</h1>
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="VMP&trade; Security Logo">
+                <h1>Welcome to VMP&trade; Security</h1>
                 <p>Manage your WordPress security plugins</p>
             </div>
 
