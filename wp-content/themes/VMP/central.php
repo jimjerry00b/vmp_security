@@ -27,7 +27,7 @@ get_header();
                 </div>
                 
                 <p class="mb-4" style="color: var(--vmp-text); line-height: 1.8; font-size: 1rem;">
-                    Manage security for multiple sites from one place with VMP&trade; Security Central. VMP&trade; Security Central is free for all VMP&trade; Security users, from VMP&trade; Security Free all the way to our VIP VMP&trade; Security Response customers. It includes a view of security events across all your sites, enables scanning across your fleet of sites, as well as template-based security configuration management. Audit log event history is available with paid VMP&trade; Security licenses.
+                    Manage security for multiple sites from one place with VMP&trade; Security Central. VMP&trade; Security Central is free for all VMP&trade; Security users, from VMP&trade; Security Free all the way to VMP&trade; Security Premium. It includes a view of security events across all your sites, enables scanning across your fleet of sites, as well as template-based security configuration management. Audit log event history is available with paid VMP&trade; Security licenses.
                 </p>
                 
                 <div class="mb-4">

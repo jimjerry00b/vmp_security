@@ -151,7 +151,7 @@ get_header();
                     </div>
                 </div>
                 <p style="color: var(--vmp-text-light); line-height: 1.8;">
-                    <strong>Save Time and Streamline</strong> Your Work. Whether you manage a few or all of your WordPress websites, VMP Central offers a <strong>free for all</strong> tier. It organizes all your site info, offers a <strong>comprehensive view</strong> of all security events at all your WordPress websites, enables VMP Remote security for all your installs, offers <strong>health tools</strong> showing domains, and server security status of all your WordPress websites, whether using VMP Firewall or not, among other <strong>premium features</strong> and capabilities. With <strong>VMP Care</strong> Central manages websites for multiple websites.
+                    <strong>Save Time and Streamline</strong> Your Work. Whether you manage a few or all of your WordPress websites, VMP Central offers a <strong>free for all</strong> tier. It organizes all your site info, offers a <strong>comprehensive view</strong> of all security events at all your WordPress websites, enables VMP Remote security for all your installs, offers <strong>health tools</strong> showing domains, and server security status of all your WordPress websites, whether using VMP Firewall or not, among other <strong>premium features</strong> and capabilities. VMP Central manages websites for multiple sites efficiently.
                 </p>
             </div>
             <div class="col-lg-6">

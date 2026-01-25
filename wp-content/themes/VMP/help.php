@@ -13,6 +13,26 @@ add_action('wp_head', function() {
 get_header(); 
 ?>
 
+<style>
+.help-sidebar-sticky {
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.help-sidebar-sticky.sticky-bottom {
+    position: absolute;
+    bottom: 0;
+    top: auto;
+}
+
+.sidebar-wrapper {
+    position: relative;
+}
+</style>
+
 <!-- Hero Section -->
 <section class="py-5" style="background: linear-gradient(135deg, #007AFF 0%, #0056b3 100%); position: relative; overflow: hidden;">
     <!-- World Map Background Pattern -->
@@ -180,47 +200,6 @@ get_header();
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: var(--vmp-gray);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16" style="color: var(--vmp-primary-dark);">
-                                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1" style="color: var(--vmp-primary);">VMP&trade; Security Care</h6>
-                                        <p class="mb-0 small text-muted">Managed security services and site cleanup</p>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <span class="badge" style="background: var(--vmp-warning);">Coming Soon</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="list-group-item border-0 px-0">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: var(--vmp-gray);">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-server" viewBox="0 0 16 16" style="color: var(--vmp-danger);">
-                                                <path d="M1.333 2.667C1.333 1.194 4.318 0 8 0s6.667 1.194 6.667 2.667V4c0 1.473-2.985 2.667-6.667 2.667S1.333 5.473 1.333 4V2.667z"/>
-                                                <path d="M1.333 6.334v3C1.333 10.805 4.318 12 8 12s6.667-1.194 6.667-2.667V6.334a6.51 6.51 0 0 1-1.458.79C11.81 7.684 9.967 8 8 8c-1.966 0-3.809-.317-5.208-.876a6.508 6.508 0 0 1-1.458-.79z"/>
-                                                <path d="M14.667 11.668a6.51 6.51 0 0 1-1.458.789c-1.4.56-3.242.876-5.21.876-1.966 0-3.809-.316-5.208-.876a6.51 6.51 0 0 1-1.458-.79v1.666C1.333 14.806 4.318 16 8 16s6.667-1.194 6.667-2.667v-1.665z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1" style="color: var(--vmp-primary);">VMP&trade; Security Response</h6>
-                                        <p class="mb-0 small text-muted">Emergency incident response and site recovery</p>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <span class="badge" style="background: var(--vmp-warning);">Coming Soon</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="list-group-item border-0 px-0">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: var(--vmp-gray);">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-life-preserver" viewBox="0 0 16 16" style="color: var(--vmp-success);">
                                                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm6.43-5.228a7.025 7.025 0 0 1-3.658 3.658l-1.115-2.788a4.015 4.015 0 0 0 1.985-1.985l2.788 1.115zM5.228 14.43a7.025 7.025 0 0 1-3.658-3.658l2.788-1.115a4.015 4.015 0 0 0 1.985 1.985L5.228 14.43zm9.202-9.202-2.788 1.115a4.015 4.015 0 0 0-1.985-1.985l1.115-2.788a7.025 7.025 0 0 1 3.658 3.658zm-8.087-.87a4.015 4.015 0 0 0-1.985 1.985L1.57 5.228A7.025 7.025 0 0 1 5.228 1.57l1.115 2.788zM8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                                             </svg>
@@ -274,8 +253,8 @@ get_header();
             </div>
 
             <!-- Right Sidebar -->
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
+            <div class="col-lg-4 sidebar-wrapper">
+                <div class="card border-0 shadow-sm help-sidebar-sticky" id="helpSidebar">
                     <div class="card-body p-4">
                         <h5 class="mb-4" style="color: var(--vmp-primary);">Top Topics and Questions</h5>
                         
@@ -434,5 +413,42 @@ get_header();
         </div>
     </div>
 </section>
+
+<script>
+(function() {
+    const sidebar = document.getElementById('helpSidebar');
+    const sidebarWrapper = sidebar?.closest('.sidebar-wrapper');
+    const footer = document.querySelector('footer');
+    
+    if (!sidebar || !footer || !sidebarWrapper) return;
+    
+    function updateSidebarPosition() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const footerTop = footer.getBoundingClientRect().top + scrollTop;
+        const sidebarHeight = sidebar.offsetHeight;
+        const sidebarWrapperTop = sidebarWrapper.getBoundingClientRect().top + scrollTop;
+        const headerOffset = 100;
+        
+        // Calculate when sidebar should stop sticking
+        const stopPoint = footerTop - sidebarHeight - headerOffset - 40;
+        
+        if (scrollTop + headerOffset + sidebarHeight > footerTop - 40) {
+            // Footer is visible, stop sticking
+            sidebar.style.position = 'absolute';
+            sidebar.style.top = 'auto';
+            sidebar.style.bottom = '0';
+        } else {
+            // Normal sticky behavior
+            sidebar.style.position = 'sticky';
+            sidebar.style.top = '100px';
+            sidebar.style.bottom = 'auto';
+        }
+    }
+    
+    window.addEventListener('scroll', updateSidebarPosition);
+    window.addEventListener('resize', updateSidebarPosition);
+    updateSidebarPosition();
+})();
+</script>
 
 <?php get_footer(); ?>
