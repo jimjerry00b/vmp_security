@@ -697,3 +697,106 @@ class VMP_Mega_Menu_Walker extends Walker_Nav_Menu {
     }
 }
 } // End class_exists check
+
+/**
+ * Custom Error Logging Function
+ * Logs errors to custom log file in WordPress root/logs directory
+ */
+function vmp_custom_log($message, $email = '') {
+    $log_dir = ABSPATH . 'logs';
+    $log_file = $log_dir . '/error_log.txt';
+    
+    // Create logs directory if it doesn't exist
+    if (!file_exists($log_dir)) {
+        wp_mkdir_p($log_dir);
+        
+        // Create .htaccess to prevent direct access
+        $htaccess_file = $log_dir . '/.htaccess';
+        $htaccess_content = "Order Deny,Allow\nDeny from all";
+        file_put_contents($htaccess_file, $htaccess_content);
+    }
+    
+    // Format log entry
+    $timestamp = current_time('Y-m-d H:i:s');
+    $email_part = !empty($email) ? " for {$email}" : '';
+    $log_entry = "[{$timestamp}] ERROR: API call failed{$email_part} - API Response: {$message}\n";
+    
+    // Append to log file
+    file_put_contents($log_file, $log_entry, FILE_APPEND);
+}
+
+/**
+ * Handle Premium Registration AJAX Request
+ */
+add_action('wp_ajax_handle_premium_registration', 'vmp_handle_premium_registration');
+add_action('wp_ajax_nopriv_handle_premium_registration', 'vmp_handle_premium_registration');
+
+function vmp_handle_premium_registration() {
+    // Verify nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'vmp_premium_registration')) {
+        wp_send_json_error(array('message' => 'Security check failed. Please refresh the page and try again.'));
+    }
+    
+    // Validate and sanitize inputs
+    $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+    $agree_terms = isset($_POST['agreeTerms']) ? sanitize_text_field($_POST['agreeTerms']) : '0';
+    
+    // Validation
+    if (empty($email) || !is_email($email)) {
+        wp_send_json_error(array('message' => 'Please provide a valid email address.'));
+    }
+    
+    if ($agree_terms !== '1') {
+        wp_send_json_error(array('message' => 'You must agree to the terms and conditions.'));
+    }
+    
+    // Prepare API request
+    $api_url = 'https://newton-wordpress-security.vpnmasterpro.com/api/v1/auth/register-premium-license';
+    $body = json_encode(array('email' => $email));
+    
+    // Make API call
+    $response = wp_remote_post($api_url, array(
+        'method'    => 'POST',
+        'timeout'   => 30,
+        'headers'   => array(
+            'Content-Type' => 'application/json',
+        ),
+        'body'      => $body,
+    ));
+    
+    // Check for network errors
+    if (is_wp_error($response)) {
+        $error_message = $response->get_error_message();
+        vmp_custom_log($error_message, $email);
+        wp_send_json_error(array('message' => 'Something went wrong on our end. Please try again later.'));
+    }
+    
+    // Get response body
+    $response_body = wp_remote_retrieve_body($response);
+    $response_code = wp_remote_retrieve_response_code($response);
+    
+    // Check for HTTP errors
+    if ($response_code !== 200) {
+        vmp_custom_log("HTTP {$response_code} - {$response_body}", $email);
+        wp_send_json_error(array('message' => 'Something went wrong on our end. Please try again later.'));
+    }
+    
+    // Parse JSON response
+    $api_response = json_decode($response_body, true);
+    
+    // Check if JSON decode was successful
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        vmp_custom_log('Invalid JSON response: ' . $response_body, $email);
+        wp_send_json_error(array('message' => 'Something went wrong on our end. Please try again later.'));
+    }
+    
+    // Check API success status
+    if (isset($api_response['success']) && $api_response['success'] === true) {
+        wp_send_json_success(array('message' => 'Registration successful!'));
+    } else {
+        // Use API's message if available, otherwise use default
+        $error_msg = isset($api_response['message']) ? $api_response['message'] : 'Registration failed. Please try again.';
+        vmp_custom_log($error_msg, $email);
+        wp_send_json_error(array('message' => $error_msg));
+    }
+}
